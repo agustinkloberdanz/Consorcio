@@ -3,13 +3,20 @@ package com.example.sqliteconnection;
 public class Deuda {
     private String detalle;
     private double valor;
+    private int dni;
 
-    @Override
-    public String toString() {
-        return "Deuda{" +
-                "detalle='" + detalle + '\'' +
-                ", valor=" + valor +
-                '}';
+    public Deuda(int dni, double valor, String detalle) {
+        this.dni = dni;
+        this.valor = valor;
+        this.detalle = detalle;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public double getValor() {
@@ -26,5 +33,14 @@ public class Deuda {
 
     public void setDetalle(String detalle) {
         this.detalle = detalle;
+    }
+
+    @Override
+    public String toString() {
+        return "Deuda{" +
+                "detalle='" + detalle + '\'' +
+                ", valor=" + valor +
+                ", dni=" + dni +
+                '}';
     }
 }
