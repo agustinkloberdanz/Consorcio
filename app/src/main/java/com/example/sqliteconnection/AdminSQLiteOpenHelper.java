@@ -8,6 +8,7 @@ import android.database.Cursor;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE users(dni INTEGER,password TEXT, admin BOOLEAN)");
-        db.execSQL("CREATE TABLE deudas(dni INTEGER,valor DOUBLE, detalle TEXT)");
+        db.execSQL("CREATE TABLE deudas(id INTEGER PRIMARY KEY AUTOINCREMENT, dni INTEGER,valor DOUBLE, detalle TEXT, fecha TEXT)");
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -32,7 +34,14 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         registro.put("dni", deuda.getDni());
         registro.put("valor", deuda.getValor());
         registro.put("detalle", deuda.getDetalle());
+        registro.put("fecha", deuda.getFecha());
         bd.insert("deudas", null, registro);
+        bd.close();
+    }
+
+    public void eliminarDeuda(int id) {
+        SQLiteDatabase bd = getWritableDatabase();
+        bd.delete("deudas", "id="+id,null);
         bd.close();
     }
 
@@ -43,7 +52,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             do {
-                list.add(new Deuda(cursor.getInt(0), cursor.getDouble(1), cursor.getString(2)));
+                list.add(new Deuda(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
             }while(cursor.moveToNext());
         }
         cursor.close();
@@ -57,7 +66,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             do {
-                list.add(new Deuda(cursor.getInt(0), cursor.getDouble(1), cursor.getString(2)));
+                list.add(new Deuda(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
             }while(cursor.moveToNext());
         }
         cursor.close();

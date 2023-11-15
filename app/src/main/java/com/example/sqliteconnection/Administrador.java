@@ -18,14 +18,4 @@ public class Administrador extends AppCompatActivity {
         Intent i = new Intent(this, ConsultarDeudas.class);
         startActivity(i);
     }
-
-    public void goToAgregarDeudas(View view) {
-        Intent i = new Intent(this, AgregarDeudas.class);
-        startActivity(i);
-    }
-
-    public void goToEliminarDeudas(View view) {
-        Intent i = new Intent(this, EliminarDeudas.class);
-        startActivity(i);
-    }
 }

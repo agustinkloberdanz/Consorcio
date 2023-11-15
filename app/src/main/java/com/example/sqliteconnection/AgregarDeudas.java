@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.sqliteconnection.AdminSQLiteOpenHelper;
-import com.example.sqliteconnection.Deuda;
-import com.example.sqliteconnection.R;
+import java.util.Calendar;
 
 public class AgregarDeudas extends AppCompatActivity {
     EditText dniET, valorET, descripcionET;
@@ -23,12 +21,13 @@ public class AgregarDeudas extends AppCompatActivity {
         dniET = findViewById(R.id.dniAgregarDeuda);
         valorET = findViewById(R.id.valorAgregarDeuda);
         descripcionET = findViewById(R.id.descripcionAgregarDeudas);
-
-
     }
 
     public void agregarDeuda(View view) {
-        Deuda deuda = new Deuda(Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString());
+        Calendar date = Calendar.getInstance();
+        String fecha = date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR);
+
+        Deuda deuda = new Deuda(null, Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString(), fecha);
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "consorcio", null, 1);
         admin.agregarDeuda(deuda);
 
