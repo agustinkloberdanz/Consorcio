@@ -19,13 +19,37 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(dni INTEGER,password TEXT, admin BOOLEAN)");
+        db.execSQL("CREATE TABLE users(dni INTEGER,password TEXT, admin INTEGER DEFAULT 0)");
         db.execSQL("CREATE TABLE deudas(id INTEGER PRIMARY KEY AUTOINCREMENT, dni INTEGER,valor DOUBLE, detalle TEXT, fecha TEXT)");
+
+        db.execSQL("INSERT INTO users VALUES(44860530, 44860530, 1)");
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    }
+
+    public User getUserData(int dni) {
+        SQLiteDatabase bd = getReadableDatabase();
+        Cursor cursor = bd.rawQuery("SELECT * FROM users WHERE dni=" + dni, null);
+
+        if(cursor.moveToFirst()) {
+            System.out.println(cursor.getInt(0));
+            System.out.println(cursor.getString(1));
+            System.out.println(cursor.getInt(2));
+
+            Boolean admin;
+            if (cursor.getInt(2) == 1) admin = true;
+            else admin = false;
+
+            User user = new User(cursor.getInt(0), cursor.getString(1), admin);
+            System.out.println(user);
+            return user;
+
+        } else {
+            return null;
+        }
     }
 
     public void agregarDeuda(Deuda deuda) {
@@ -54,9 +78,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             do {
                 list.add(new Deuda(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
             }while(cursor.moveToNext());
+            cursor.close();
+            return list;
+        } else {
+            return null;
         }
-        cursor.close();
-        return list;
     }
 
     public List<Deuda> listarDeudas() {
@@ -68,9 +94,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             do {
                 list.add(new Deuda(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
             }while(cursor.moveToNext());
+            cursor.close();
+            return list;
         }
-        cursor.close();
-        return list;
+        else {
+            return null;
+        }
     }
 
 

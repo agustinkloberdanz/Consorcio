@@ -11,20 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="listarDeudas"
-        android:text="Consultar deudas"
-        android:textSize="34sp"
+        android:text="Ver deudas"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintTop_toBottomOf="@+id/dni"
+        app:layout_constraintVertical_bias="0.024" />
 
     <EditText
         android:id="@+id/dni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="dni"
+        android:hint="DNI"
         android:inputType="number"
         android:numeric="integer"
         android:soundEffectsEnabled="true"
