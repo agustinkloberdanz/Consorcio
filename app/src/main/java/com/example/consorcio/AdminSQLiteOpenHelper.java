@@ -1,4 +1,4 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.database.Cursor;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE users(dni INTEGER,password TEXT, admin INTEGER DEFAULT 0)");
-        db.execSQL("CREATE TABLE deudas(id INTEGER PRIMARY KEY AUTOINCREMENT, dni INTEGER,valor DOUBLE, detalle TEXT, fecha TEXT)");
+        db.execSQL("CREATE TABLE deudas(id LONG PRIMARY KEY AUTOINCREMENT, dni INTEGER,valor DOUBLE, detalle TEXT, fecha TEXT)");
 
         db.execSQL("INSERT INTO users VALUES(44860530, 44860530, 1)");
     }
@@ -63,7 +62,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         bd.close();
     }
 
-    public void eliminarDeuda(int id) {
+    public void eliminarDeuda(long id) {
         SQLiteDatabase bd = getWritableDatabase();
         bd.delete("deudas", "id="+id,null);
         bd.close();

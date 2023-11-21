@@ -1,4 +1,4 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import org.junit.Test;
 

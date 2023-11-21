@@ -1,4 +1,4 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,8 +29,7 @@ public class Administrador extends AppCompatActivity {
 
             if(user != null) {
                 User userCheck = new User(Integer.parseInt(usr.getText().toString()), pass.getText().toString(), user.getAdmin());
-
-
+                
                 if(user.equals(userCheck)) {
                     if(user.getAdmin()) {
                         goToConsultarDeudas();

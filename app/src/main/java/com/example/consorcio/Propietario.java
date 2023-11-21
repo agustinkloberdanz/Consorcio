@@ -1,15 +1,10 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;

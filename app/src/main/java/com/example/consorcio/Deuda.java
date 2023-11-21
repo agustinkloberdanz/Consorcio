@@ -1,8 +1,9 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
-import androidx.annotation.Nullable;
+import java.util.Objects;
 
-public class Deuda { private int id;
+public class Deuda {
+    private long id;
     private String detalle;
     private double valor;
     private int dni;
@@ -16,25 +17,18 @@ public class Deuda { private int id;
         this.fecha = fecha;
     }
 
-    public Deuda(Integer integer, int dni, double valor, String detalle, String fecha) {
+    public Deuda(int dni, double valor, String detalle, String fecha) {
         this.dni = dni;
         this.valor=valor;
         this.detalle = detalle;
         this.fecha = fecha;
     }
 
-//    public Deuda(int dni, double valor, String detalle, String fecha) {
-//        this.dni = dni;
-//        this.valor = valor;
-//        this.detalle = detalle;
-//        this.fecha = fecha;
-//    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -79,5 +73,18 @@ public class Deuda { private int id;
                 ", dni=" + dni +
                 ", fecha='" + fecha + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deuda deuda = (Deuda) o;
+        return id == deuda.id && Double.compare(deuda.valor, valor) == 0 && dni == deuda.dni && Objects.equals(detalle, deuda.detalle) && Objects.equals(fecha, deuda.fecha);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, detalle, valor, dni, fecha);
     }
 }

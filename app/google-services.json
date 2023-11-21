@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "792600674561",
+    "project_id": "consorcio-3e25a",
+    "storage_bucket": "consorcio-3e25a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792600674561:android:aaafcb1551667f190e9b00",
+        "android_client_info": {
+          "package_name": "com.example.consorcio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj29EBWn2bYZkjab2Z-tf3aZ_HLMEtXhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

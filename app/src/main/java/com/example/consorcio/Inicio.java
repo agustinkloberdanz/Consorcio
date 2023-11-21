@@ -1,4 +1,4 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import androidx.appcompat.app.AppCompatActivity;
 

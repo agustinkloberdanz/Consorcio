@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SQLiteConnection"
+rootProject.name = "Consorcio"
 include(":app")
  

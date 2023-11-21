@@ -1,4 +1,4 @@
-package com.example.sqliteconnection;
+package com.example.consorcio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,15 +27,30 @@ public class AgregarDeudas extends AppCompatActivity {
         Calendar date = Calendar.getInstance();
         String fecha = date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR);
 
-        Deuda deuda = new Deuda(null, Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString(), fecha);
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "consorcio", null, 1);
-        admin.agregarDeuda(deuda);
+        Deuda deuda = new Deuda(Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString(), fecha);
+
+        DBHelper db = new DBHelper();
+        db.insert(deuda);
 
         dniET.setText("");
         valorET.setText("");
         descripcionET.setText("");
         Toast.makeText(this, "Se cargo la deuda en la DB", Toast.LENGTH_SHORT).show();
     }
+
+//    public void agregarDeuda(View view) {
+//        Calendar date = Calendar.getInstance();
+//        String fecha = date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR);
+//
+//        Deuda deuda = new Deuda(null, Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString(), fecha);
+//        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "consorcio", null, 1);
+//        admin.agregarDeuda(deuda);
+//
+//        dniET.setText("");
+//        valorET.setText("");
+//        descripcionET.setText("");
+//        Toast.makeText(this, "Se cargo la deuda en la DB", Toast.LENGTH_SHORT).show();
+//    }
 
 
 
