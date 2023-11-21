@@ -47,9 +47,6 @@ public class DBHelper {
                     String fecha = ds.child("fecha").getValue().toString();
                     Deuda deudaAux = new Deuda(dni, valor, detalle, fecha);
 
-                    System.out.println(deuda);
-                    System.out.println(deudaAux);
-
                     if(deuda.equals(deudaAux)) {
                         ds.getRef().removeValue();
                     }

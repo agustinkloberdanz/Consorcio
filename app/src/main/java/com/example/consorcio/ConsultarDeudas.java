@@ -1,8 +1,10 @@
 package com.example.consorcio;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -119,7 +121,7 @@ public class ConsultarDeudas extends AppCompatActivity {
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                eliminarDeuda(d);
+                                verDeuda(d);
                             }
                         });
 
@@ -144,8 +146,9 @@ public class ConsultarDeudas extends AppCompatActivity {
 
                         tabla.addView(trTab);
                     }
+                } else {
+                    Toast.makeText(ConsultarDeudas.this, "No hay deudas actualmente", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -159,6 +162,26 @@ public class ConsultarDeudas extends AppCompatActivity {
         DBHelper db = new DBHelper();
         db.delete(deuda);
         Toast.makeText(this, "Se elimino la deuda en la DB", Toast.LENGTH_SHORT).show();
+    }
+
+    public void verDeuda(Deuda deuda) {
+        String msg = "\n\n";
+        msg += "DNI: " + deuda.getDni() +"\n\n";
+        msg += "Valor: " + deuda.getValor() +"\n\n";
+        msg += "Detalle: " + deuda.getDetalle() +"\n\n";
+        msg += "Fecha: " + deuda.getFecha() +"\n\n";
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Más información")
+                .setCancelable(true)
+                .setMessage(msg)
+                .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        eliminarDeuda(deuda);
+                    }
+                })
+                .show();
     }
 
     public void goToAgregarDeudas(View view) {
