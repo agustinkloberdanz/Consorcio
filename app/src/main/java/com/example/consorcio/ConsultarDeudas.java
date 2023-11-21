@@ -24,39 +24,30 @@ import java.util.List;
 
 public class ConsultarDeudas extends AppCompatActivity {
     TableLayout tabla;
-    Button agregarButton;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        listarDeudas();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        listarDeudas();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_deudas);
 
-        agregarButton = findViewById(R.id.agregarDeudaViewButton);
-        agregarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToAgregarDeudas();
-            }
-        });
-
         tabla = findViewById(R.id.tablaDeudas);
+        listarDeudas();
     }
 
     public void listarDeudas() {
-            FirebaseDatabase db = FirebaseDatabase.getInstance();
-            DatabaseReference dbref = db.getReference(Deuda.class.getSimpleName());
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = db.getReference(Deuda.class.getSimpleName());
 
-            dbref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    tabla.removeAllViews();
-
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tabla.removeAllViews();
+                if (snapshot.getChildrenCount() > 0) {
                     TextView th0 = new TextView(ConsultarDeudas.this);
                     th0.setText("DNI");
                     TextView th1 = new TextView(ConsultarDeudas.this);
@@ -93,7 +84,7 @@ public class ConsultarDeudas extends AppCompatActivity {
                     tr0.addView(th3);
 
                     tabla.addView(tr0);
-                    for(DataSnapshot ds : snapshot.getChildren()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         int dni = Integer.parseInt(ds.child("dni").getValue().toString());
                         Double valor = Double.parseDouble(ds.child("valor").getValue().toString());
                         String detalle = ds.child("detalle").getValue().toString();
@@ -102,9 +93,9 @@ public class ConsultarDeudas extends AppCompatActivity {
                         Deuda d = new Deuda(dni, valor, detalle, fecha);
 
                         TextView tb0 = new TextView(ConsultarDeudas.this);
-                        tb0.setText(""+ d.getDni());
+                        tb0.setText("" + d.getDni());
                         TextView tb1 = new TextView(ConsultarDeudas.this);
-                        tb1.setText("$"+ d.getValor());
+                        tb1.setText("$" + d.getValor());
                         TextView tb2 = new TextView(ConsultarDeudas.this);
                         tb2.setText(d.getDetalle());
                         TextView tb3 = new TextView(ConsultarDeudas.this);
@@ -152,16 +143,27 @@ public class ConsultarDeudas extends AppCompatActivity {
                         trTab.setMinimumHeight(1);
 
                         tabla.addView(trTab);
-
-
                     }
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            }
 
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void eliminarDeuda(Deuda deuda) {
+        DBHelper db = new DBHelper();
+        db.delete(deuda);
+        Toast.makeText(this, "Se elimino la deuda en la DB", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goToAgregarDeudas(View view) {
+        Intent i = new Intent(this, AgregarDeudas.class);
+        startActivity(i);
     }
 
 //    public void listarDeudas() {
@@ -263,16 +265,5 @@ public class ConsultarDeudas extends AppCompatActivity {
 //            }
 //        }
 //    }
-    public void eliminarDeuda(Deuda deuda) {
-        DBHelper db = new DBHelper();
-        db.delete(deuda);
-        listarDeudas();
 
-        Toast.makeText(this, "Se elimino la deuda en la DB", Toast.LENGTH_SHORT).show();
-
-    }
-    public void goToAgregarDeudas() {
-        Intent i = new Intent(this, AgregarDeudas.class);
-        startActivity(i);
-    }
 }
