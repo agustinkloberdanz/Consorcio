@@ -45,7 +45,9 @@ public class DBHelper {
                     Double valor = Double.parseDouble(ds.child("valor").getValue().toString());
                     String detalle = ds.child("detalle").getValue().toString();
                     String fecha = ds.child("fecha").getValue().toString();
-                    Deuda deudaAux = new Deuda(dni, valor, detalle, fecha);
+                    String depto = ds.child("depto").getValue().toString();
+                    String referencia = ds.child("referencia").getValue().toString();
+                    Deuda deudaAux = new Deuda(dni, valor, detalle, fecha, referencia, depto);
 
                     if(deuda.equals(deudaAux)) {
                         ds.getRef().removeValue();
@@ -58,7 +60,6 @@ public class DBHelper {
 
             }
         });
-
     }
 
 

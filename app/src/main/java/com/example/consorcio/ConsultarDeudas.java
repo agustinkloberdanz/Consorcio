@@ -26,11 +26,6 @@ import java.util.List;
 
 public class ConsultarDeudas extends AppCompatActivity {
     TableLayout tabla;
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        listarDeudas();
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +86,21 @@ public class ConsultarDeudas extends AppCompatActivity {
                         Double valor = Double.parseDouble(ds.child("valor").getValue().toString());
                         String detalle = ds.child("detalle").getValue().toString();
                         String fecha = ds.child("fecha").getValue().toString();
+                        String referencia = ds.child("referencia").getValue().toString();
+                        String depto = ds.child("depto").getValue().toString();
 
-                        Deuda d = new Deuda(dni, valor, detalle, fecha);
+                        Deuda d = new Deuda(dni, valor, detalle, fecha, referencia, depto);
 
                         TextView tb0 = new TextView(ConsultarDeudas.this);
                         tb0.setText("" + d.getDni());
                         TextView tb1 = new TextView(ConsultarDeudas.this);
                         tb1.setText("$" + d.getValor());
                         TextView tb2 = new TextView(ConsultarDeudas.this);
-                        tb2.setText(d.getDetalle());
+                        tb2.setText(d.getReferencia());
                         TextView tb3 = new TextView(ConsultarDeudas.this);
                         tb3.setText(d.getFecha());
                         TextView btn = new TextView(ConsultarDeudas.this);
-                        btn.setText("-");
+                        btn.setText("+");
 
                         tb0.setTextSize(18);
                         tb1.setTextSize(18);
@@ -117,7 +114,7 @@ public class ConsultarDeudas extends AppCompatActivity {
                         tb3.setWidth(245);
                         btn.setWidth(100);
                         btn.setHeight(100);
-                        btn.setBackgroundColor(Color.parseColor("#ff0000"));
+                        btn.setBackgroundColor(Color.parseColor("#36ff00"));
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -167,7 +164,9 @@ public class ConsultarDeudas extends AppCompatActivity {
     public void verDeuda(Deuda deuda) {
         String msg = "\n\n";
         msg += "DNI: " + deuda.getDni() +"\n\n";
+        msg += "Departamento: " + deuda.getDepto() +"\n\n";
         msg += "Valor: " + deuda.getValor() +"\n\n";
+        msg += "Referencia: " + deuda.getReferencia() +"\n\n";
         msg += "Detalle: " + deuda.getDetalle() +"\n\n";
         msg += "Fecha: " + deuda.getFecha() +"\n\n";
 

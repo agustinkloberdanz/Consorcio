@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class AgregarDeudas extends AppCompatActivity {
-    EditText dniET, valorET, descripcionET;
+    EditText dniET, valorET, descripcionET, referenciaET, deptoET;
     Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +21,20 @@ public class AgregarDeudas extends AppCompatActivity {
         dniET = findViewById(R.id.dniAgregarDeuda);
         valorET = findViewById(R.id.valorAgregarDeuda);
         descripcionET = findViewById(R.id.descripcionAgregarDeudas);
+        referenciaET = findViewById(R.id.referenciaAgregarDeudas);
+        deptoET = findViewById(R.id.deptoAgregarDeudas);
     }
 
     public void agregarDeuda(View view) {
+        int dni = Integer.parseInt(dniET.getText().toString().trim());
+        double valor = Double.parseDouble(valorET.getText().toString().trim());
+        String referencia = referenciaET.getText().toString().trim();
+        String descripcion = descripcionET.getText().toString().trim();
+        String depto = deptoET.getText().toString().trim();
         Calendar date = Calendar.getInstance();
         String fecha = date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR);
 
-        Deuda deuda = new Deuda(Integer.parseInt(dniET.getText().toString()), Double.parseDouble(valorET.getText().toString()), descripcionET.getText().toString(), fecha);
+        Deuda deuda = new Deuda(dni, valor, descripcion, fecha, referencia, depto);
 
         DBHelper db = new DBHelper();
         db.insert(deuda);
@@ -35,6 +42,8 @@ public class AgregarDeudas extends AppCompatActivity {
         dniET.setText("");
         valorET.setText("");
         descripcionET.setText("");
+        referenciaET.setText("");
+        deptoET.setText("");
         Toast.makeText(this, "Se cargo la deuda en la DB", Toast.LENGTH_SHORT).show();
     }
 

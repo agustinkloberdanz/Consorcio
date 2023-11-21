@@ -3,33 +3,38 @@ package com.example.consorcio;
 import java.util.Objects;
 
 public class Deuda {
-    private long id;
-    private String detalle;
     private double valor;
     private int dni;
+    private String referencia;
+    private String depto;
+    private String detalle;
     private String fecha;
 
-    public Deuda(int id, int dni, double valor, String detalle, String fecha) {
-        this.id = id;
+    public Deuda(int dni, double valor, String detalle, String fecha, String referencia, String depto) {
         this.dni = dni;
         this.valor = valor;
         this.detalle = detalle;
         this.fecha = fecha;
+        this.referencia = referencia;
+        this.depto = depto;
     }
 
-    public Deuda(int dni, double valor, String detalle, String fecha) {
-        this.dni = dni;
-        this.valor=valor;
-        this.detalle = detalle;
-        this.fecha = fecha;
+    public String getDepto() {
+        return depto;
     }
 
-    public long getId() {
-        return id;
+    public Deuda setDepto(String depto) {
+        this.depto = depto;
+        return this;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public Deuda setReferencia(String referencia) {
+        this.referencia = referencia;
+        return this;
     }
 
     public String getFecha() {
@@ -67,10 +72,11 @@ public class Deuda {
     @Override
     public String toString() {
         return "Deuda{" +
-                "id=" + id +
-                ", detalle='" + detalle + '\'' +
-                ", valor=" + valor +
+                "valor=" + valor +
                 ", dni=" + dni +
+                ", referencia='" + referencia + '\'' +
+                ", depto='" + depto + '\'' +
+                ", detalle='" + detalle + '\'' +
                 ", fecha='" + fecha + '\'' +
                 '}';
     }
@@ -80,11 +86,11 @@ public class Deuda {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Deuda deuda = (Deuda) o;
-        return id == deuda.id && Double.compare(deuda.valor, valor) == 0 && dni == deuda.dni && Objects.equals(detalle, deuda.detalle) && Objects.equals(fecha, deuda.fecha);
+        return Double.compare(deuda.valor, valor) == 0 && dni == deuda.dni && Objects.equals(referencia, deuda.referencia) && Objects.equals(depto, deuda.depto) && Objects.equals(detalle, deuda.detalle) && Objects.equals(fecha, deuda.fecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, detalle, valor, dni, fecha);
+        return Objects.hash(valor, dni, referencia, depto, detalle, fecha);
     }
 }
