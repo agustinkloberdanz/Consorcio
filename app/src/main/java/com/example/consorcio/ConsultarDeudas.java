@@ -44,13 +44,14 @@ public class ConsultarDeudas extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tabla.removeAllViews();
+
                 if (snapshot.getChildrenCount() > 0) {
                     TextView th0 = new TextView(ConsultarDeudas.this);
                     th0.setText("DNI");
                     TextView th1 = new TextView(ConsultarDeudas.this);
                     th1.setText("Valor");
                     TextView th2 = new TextView(ConsultarDeudas.this);
-                    th2.setText("Detalle");
+                    th2.setText("Referencia");
                     TextView th3 = new TextView(ConsultarDeudas.this);
                     th3.setText("Fecha");
 
@@ -100,8 +101,7 @@ public class ConsultarDeudas extends AppCompatActivity {
                         TextView tb3 = new TextView(ConsultarDeudas.this);
                         tb3.setText(d.getFecha());
                         TextView btn = new TextView(ConsultarDeudas.this);
-                        btn.setCompoundDrawablesWithIntrinsicBounds(0,0, 0,R.drawable.listaicon);
-
+                        btn.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.iconlist,0);
                         tb0.setTextSize(18);
                         tb1.setTextSize(18);
                         tb2.setTextSize(18);
@@ -112,9 +112,7 @@ public class ConsultarDeudas extends AppCompatActivity {
                         tb1.setWidth(245);
                         tb2.setWidth(245);
                         tb3.setWidth(245);
-                        btn.setWidth(100);
-                        btn.setHeight(100);
-                        btn.setBackgroundColor(Color.parseColor("#36ff00"));
+                        btn.setHeight(80);
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

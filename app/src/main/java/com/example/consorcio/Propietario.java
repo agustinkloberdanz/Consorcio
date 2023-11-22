@@ -109,8 +109,7 @@ public class Propietario extends AppCompatActivity {
                                 TextView tb3 = new TextView(Propietario.this);
                                 tb3.setText(d.getFecha());
                                 TextView btn = new TextView(Propietario.this);
-                                btn.setCompoundDrawablesWithIntrinsicBounds(0,0, 0,R.drawable.listaicon);
-
+                                btn.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.iconlist,0);
                                 tb0.setTextSize(18);
                                 tb1.setTextSize(18);
                                 tb2.setTextSize(18);
@@ -121,9 +120,7 @@ public class Propietario extends AppCompatActivity {
                                 tb1.setWidth(245);
                                 tb2.setWidth(245);
                                 tb3.setWidth(245);
-                                btn.setWidth(100);
-                                btn.setHeight(100);
-                                btn.setBackgroundColor(Color.parseColor("#36ff00"));
+                                btn.setHeight(80);
                                 btn.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -153,8 +150,10 @@ public class Propietario extends AppCompatActivity {
                                 tabla.addView(trTab);
                             }
                         }
-                    } else {
-                        Toast.makeText(Propietario.this, "El DNI ingresado no tiene deudas", Toast.LENGTH_SHORT).show();
+                    }
+                    if (tabla.getChildCount() == 1) {
+                        Toast.makeText(Propietario.this, "El usuario con el DNI:" + dniInput + " no tiene deudas", Toast.LENGTH_SHORT).show();
+                        tabla.removeAllViews();
                     }
                 }
 
