@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Propietario">
 
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonVerDeudas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="listarDeudas"
@@ -18,13 +18,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <EditText
         android:id="@+id/dni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:focusable="auto"
         android:hint="DNI"
         android:inputType="number"
         android:numeric="integer"
@@ -41,10 +42,11 @@
 
     <ScrollView
         android:id="@+id/listadoDeudasScrollView"
-        android:layout_width="407dp"
-        android:layout_height="629dp"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -54,10 +56,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <TableLayout
                 android:id="@+id/listDeudas"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
 
             </TableLayout>
         </LinearLayout>

@@ -4,12 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,12 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 public class Propietario extends AppCompatActivity {
 
     EditText dniET;
     TableLayout tabla;
+    Button button;
 
 
     @Override
@@ -35,12 +32,24 @@ public class Propietario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_propietario);
         dniET = findViewById(R.id.dni);
-
+        button = findViewById(R.id.buttonVerDeudas);
         tabla = findViewById(R.id.listDeudas);
+
+        dniET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    tabla.setVisibility(View.INVISIBLE);
+                }
+                if (!hasFocus) {
+                    tabla.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
     }
 
     public void listarDeudas(View view) {
-
         if (!dniET.getText().toString().isEmpty()) {
             int dniInput = Integer.parseInt(dniET.getText().toString().trim());
 
@@ -53,6 +62,8 @@ public class Propietario extends AppCompatActivity {
                     tabla.removeAllViews();
 
                     if (snapshot.getChildrenCount() > 0) {
+                        tabla.setVisibility(View.VISIBLE);
+
                         TextView th0 = new TextView(Propietario.this);
                         th0.setText("DNI");
                         TextView th1 = new TextView(Propietario.this);
@@ -109,7 +120,7 @@ public class Propietario extends AppCompatActivity {
                                 TextView tb3 = new TextView(Propietario.this);
                                 tb3.setText(d.getFecha());
                                 TextView btn = new TextView(Propietario.this);
-                                btn.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.iconlist,0);
+                                btn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.iconlist, 0);
                                 tb0.setTextSize(18);
                                 tb1.setTextSize(18);
                                 tb2.setTextSize(18);
@@ -164,18 +175,20 @@ public class Propietario extends AppCompatActivity {
             });
         } else {
             Toast.makeText(this, "Ingrese su DNI si quiere consultar sus deudas", Toast.LENGTH_SHORT).show();
+            tabla.removeAllViews();
         }
         dniET.setText("");
+        dniET.clearFocus();
     }
 
     private void verDeuda(Deuda deuda) {
         String msg = "\n\n";
-        msg += "DNI: " + deuda.getDni() +"\n\n";
-        msg += "Departamento: " + deuda.getDepto() +"\n\n";
-        msg += "Valor: " + deuda.getValor() +"\n\n";
-        msg += "Referencia: " + deuda.getReferencia() +"\n\n";
-        msg += "Detalle: " + deuda.getDetalle() +"\n\n";
-        msg += "Fecha: " + deuda.getFecha() +"\n\n";
+        msg += "DNI: " + deuda.getDni() + "\n\n";
+        msg += "Departamento: " + deuda.getDepto() + "\n\n";
+        msg += "Valor: $" + deuda.getValor() + "\n\n";
+        msg += "Referencia: " + deuda.getReferencia() + "\n\n";
+        msg += "Detalle: " + deuda.getDetalle() + "\n\n";
+        msg += "Fecha: " + deuda.getFecha() + "\n\n";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Más información")

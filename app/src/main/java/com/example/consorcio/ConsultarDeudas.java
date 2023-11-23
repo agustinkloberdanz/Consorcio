@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConsultarDeudas extends AppCompatActivity {
     TableLayout tabla;
@@ -163,7 +160,7 @@ public class ConsultarDeudas extends AppCompatActivity {
         String msg = "\n\n";
         msg += "DNI: " + deuda.getDni() +"\n\n";
         msg += "Departamento: " + deuda.getDepto() +"\n\n";
-        msg += "Valor: " + deuda.getValor() +"\n\n";
+        msg += "Valor: $" + deuda.getValor() +"\n\n";
         msg += "Referencia: " + deuda.getReferencia() +"\n\n";
         msg += "Detalle: " + deuda.getDetalle() +"\n\n";
         msg += "Fecha: " + deuda.getFecha() +"\n\n";
