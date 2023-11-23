@@ -83,9 +83,9 @@ public class Propietario extends AppCompatActivity {
                         th2.setBackgroundColor(Color.parseColor("#a200ff"));
                         th3.setBackgroundColor(Color.parseColor("#a200ff"));
 
-                        th0.setWidth(245);
-                        th1.setWidth(245);
-                        th2.setWidth(245);
+                        th0.setWidth(210);
+                        th2.setWidth(210);
+                        th2.setWidth(305);
                         th3.setWidth(245);
 
                         th0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -127,9 +127,9 @@ public class Propietario extends AppCompatActivity {
                                 tb3.setTextSize(18);
                                 btn.setTextSize(18);
 
-                                tb0.setWidth(245);
-                                tb1.setWidth(245);
-                                tb2.setWidth(245);
+                                tb0.setWidth(210);
+                                tb1.setWidth(210);
+                                tb2.setWidth(305);
                                 tb3.setWidth(245);
                                 btn.setHeight(80);
                                 btn.setOnClickListener(new View.OnClickListener() {
